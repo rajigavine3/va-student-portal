@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VA Webinar Student Portal</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- Supabase JS Library -->
+    <script src="https://jsdelivr.net"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="bg-white shadow-xs border-b border-slate-200 p-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold tracking-tight text-indigo-600">VA Academy Portal</h1>
+        <button id="logout-btn" class="hidden bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-1.5 rounded-lg text-sm font-medium transition">Log Out</button>
+    </header>
+
+    <!-- MAIN INTERFACE CONTAINER -->
+    <main class="max-w-4xl w-full mx-auto p-4 flex-1 flex flex-col justify-center items-center">
+
+        <!-- 1. AUTHENTICATION BOX (Sign Up / Sign In) -->
+        <div id="auth-box" class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+            <h2 id="auth-title" class="text-2xl font-extrabold text-center mb-6">Register for the Live Webinar</h2>
+            
+            <form id="auth-form" class="space-y-4">
+                <div id="name-field-container">
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">Full Name</label>
+                    <input type="text" id="auth-name" placeholder="Juan Dela Cruz" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">Email Address</label>
+                    <input type="email" id="auth-email" required placeholder="you@example.com" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-600 mb-1">Password</label>
+                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <button type="submit" id="auth-submit-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-100">Create Account</button>
+            </form>
+
+            <p class="text-center text-sm text-slate-500 mt-6">
+                <span id="toggle-text">Already registered?</span> 
+                <button id="toggle-auth-mode" class="text-indigo-600 font-semibold hover:underline">Log In here</button>
+            </p>
+        </div>
+
+        <!-- 2. PENDING WAITING ROOM -->
+        <div id="waiting-room" class="hidden text-center max-w-md bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">⏰</div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Account Pending Approval</h2>
+            <p class="text-slate-600 leading-relaxed">Thank you for registering! The organizer is manually reviewing applications. You will gain access to the live stream immediately once your profile is approved.</p>
+        </div>
+
+        <!-- 3. MAIN LIVE WEBINAR PORTAL (APPROVED USERS ONLY) -->
+        <div id="portal-content" class="hidden w-full space-y-6">
+            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 flex items-center space-x-3">
+                <span class="flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                </span>
+                <p class="text-indigo-900 font-semibold text-sm">Live Broadcast in Progress</p>
+            </div>
+
+            <!-- Video Player & Sidebar Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Video Stream Embed -->
+                <!-- Google Meet Secure Access Panel -->
+<div class="md:col-span-2 bg-gradient-to-br from-indigo-900 to-slate-900 text-white rounded-2xl p-8 flex flex-col justify-between shadow-lg border border-indigo-950 aspect-video">
+    <div class="space-y-3">
+        <span class="bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">Access Granted</span>
+        <h3 class="text-2xl font-extrabold tracking-tight">Virtual Assistant Live Training Room</h3>
+        <p class="text-slate-300 text-sm max-w-md">Your profile is approved. Click the button below to join the live Google Meet call. Please keep your microphone muted upon entry.</p>
+    </div>
+    
+    <div class="pt-6">
+        <!-- REPLACE THE URL BELOW WITH YOUR ACTUAL GOOGLE MEET LINK -->
+        <a href="https://https://meet.google.com/two-jnqe-yoj" target="_blank" class="inline-flex items-center space-x-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5">
+            <span>🟢 Join Google Meet Session</span>
+            <svg xmlns="http://w3.org" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+                
+                <!-- Live Interactions / Links -->
+                <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-100 flex flex-col justify-between space-y-4">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">Webinar Resources</h3>
+                        <p class="text-xs text-slate-500 mb-4">Download exclusive toolkits shared during the session.</p>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="block p-2.5 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-100 rounded-xl text-sm font-medium transition">📋 VA Pitch Email Template</a></li>
+                            <li><a href="#" class="block p-2.5 bg-slate-50 hover:bg-indigo-50 hover:text-indigo-600 border border-slate-100 rounded-xl text-sm font-medium transition">📊 Client Discovery Call Script</a></li>
+                        </ul>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Need Help?</p>
+                        <p class="text-sm text-slate-600">Drop a question in the official chat room below the stream window.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center p-4 text-xs text-slate-400 border-t border-slate-100 bg-white">
+        &copy; 2026 Virtual Assistant Training Academy. All rights reserved.
+    </footer>
+
+    <!-- CLIENT LOGIC & SUPABASE ROUTING -->
+    <script>
+        // Initialize Supabase configuration
+        const SUPABASE_URL = "https://ushqjzsavhfvekbxvplj.supabase.co/rest/v1/Profiles"; 
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVzaHFqenNhdmhmdmVrYnh2cGxqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMxNjk4MDIsImV4cCI6MjEwODc0NTgwMn0.6WZwrGgi18DYCmhzBU59tDThvLEBNajeSxF86M8irh8";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // UI Element Selectors
+        const authBox = document.getElementById('auth-box');
+        const waitingRoom = document.getElementById('waiting-room');
+        const portalContent = document.getElementById('portal-content');
+        const logoutBtn = document.getElementById('logout-btn');
+        const authForm = document.getElementById('auth-form');
+        const authTitle = document.getElementById('auth-title');
+        const nameFieldContainer = document.getElementById('name-field-container');
+        const submitBtn = document.getElementById('auth-submit-btn');
+        const toggleAuthMode = document.getElementById('toggle-auth-mode');
+        const toggleText = document.getElementById('toggle-text');
+
+        let isSignUpMode = true;
+
+        // Toggle between Registration and Login modes
+        toggleAuthMode.addEventListener('click', () => {
+            isSignUpMode = !isSignUpMode;
+            if (isSignUpMode) {
+                authTitle.innerText = "Register for the Live Webinar";
+                nameFieldContainer.classList.remove('hidden');
+                submitBtn.innerText = "Create Account";
+                toggleText.innerText = "Already registered?";
+                toggleAuthMode.innerText = "Log In here";
+            } else {
+                authTitle.innerText = "Welcome Back Student";
+                nameFieldContainer.classList.add('hidden');
+                submitBtn.innerText = "Log In";
+                toggleText.innerText = "New student?";
+                toggleAuthMode.innerText = "Sign Up here";
+            }
+        });
+
+        // Handle Session Routing Rules based on Profile State
+        async function routeUserSession(user) {
+            if (!user) {
+                authBox.classList.remove('hidden');
+                waitingRoom.classList.add('hidden');
+                portalContent.classList.add('hidden');
+                logoutBtn.classList.add('hidden');
+                return;
+            }
+
+            // Fetch profile verification statuses from Postgres
+            const { data: profile, error } = await supabase
+                .from('profiles')
+                .select('is_approved')
+                .eq('id', user.id)
+                .single();
+
+            authBox.classList.add('hidden');
+            logoutBtn.classList.remove('hidden');
+
+            if (profile && profile.is_approved) {
+                waitingRoom.classList.add('hidden');
+                portalContent.classList.remove('hidden');
+            } else {
+                waitingRoom.classList.remove('hidden');
+                portalContent.classList.add('hidden');
+            }
+        }
+
+        // Handle Signup & Login Submissions
+        authForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const fullName = document.getElementById('auth-name').value;
+
+            if (isSignUpMode) {
+                // Register a new user account
